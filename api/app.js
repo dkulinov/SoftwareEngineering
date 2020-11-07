@@ -1,21 +1,21 @@
 var express = require('express')
 var db = require('./db.js');
 const { response } = require('express');
-var port = process.env.PORT || 3008;
+var port = process.env.PORT || 3000;
 var app = express();
 var bodyParser = require('body-parser');
+var path = require('path');
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, './')));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
-app.get('/', funtion(req, res)
+app.get('/', function(req, res)
 {
-
+    res.sendFile(path.join(__dirname, 'main.html'));
 })
 
-app.get('/home/:adminType', function(req, res)
+app.get('/:adminType', function(req, res)
 {
     const adminType = req.params.adminType;
         db.getLinks(adminType, function(err, linkInfo){
@@ -23,10 +23,14 @@ app.get('/home/:adminType', function(req, res)
                 console.log(err);
             else
             {
-                console.log(linkInfo);
-                res.json({ linkInfo: linkInfo[0] });
+                let links = {
+                    type: adminType,
+                    links: linkInfo
+                }
+                res.render('portal', { linkInfo: links });
             }
         });
 });
+
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));

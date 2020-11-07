@@ -35,5 +35,3 @@ CREATE TABLE technology
     link_name VARCHAR(50) NOT NULL,
     PRIMARY KEY(link)
 );
-
-INSERT INTO support VALUES('https://www.google.com', 'Manage User Accounts');
