@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 
 let pool = mysql.createPool({
-    host: 'portals-db.c8nymykjozrb.us-east-2.rds.amazonaws.com',
+    host: 'portals.cwy5bexfqndv.us-west-2.rds.amazonaws.com',
     user: 'admin',
     password: 'adminadmin',
     database: 'portals'
